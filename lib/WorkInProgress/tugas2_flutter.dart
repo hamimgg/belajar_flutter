@@ -31,7 +31,7 @@ class Tugas2Flutter extends StatelessWidget {
       ),
  
       body: SingleChildScrollView(
-        // ─── WAJIB: Column (struktur utama halaman) ─────────────────
+        // ─── olumn (struktur utama halaman) ─────────────────
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -91,7 +91,7 @@ class Tugas2Flutter extends StatelessWidget {
                           width: 3,
                         ),
                       ),
-                      // ─── WAJIB: Center ────────────────────────────
+                      // ─── Center ────────────────────────────
                       child: const Center(
                         child: Text(
                           'PK',
@@ -104,7 +104,7 @@ class Tugas2Flutter extends StatelessWidget {
                       ),
                     ),
  
-                    // ─── WAJIB: SizedBox (jarak vertikal) ─────────────
+                    // ─── SizedBox (jarak vertikal) ─────────────
                     const SizedBox(height: 8),
  
                     // ─── 2. IDENTITAS UTAMA (Center + Nama) ───────────
@@ -198,7 +198,7 @@ class Tugas2Flutter extends StatelessWidget {
                           size: 18,
                           color: Color(0xFFF5A623),
                         ),
-                        // ─── WAJIB: SizedBox sebagai jarak ────────────
+                        // ─── SizedBox sebagai jarak ────────────
                         SizedBox(width: 10),
                         Text(
                           'pakkartosnack@asongan.id',
@@ -272,7 +272,7 @@ class Tugas2Flutter extends StatelessWidget {
                             color: Color(0xFF1C1C1E),
                           ),
                         ),
-                        // ─── WAJIB: Spacer mendorong elemen ke kanan ──
+                        // ─── Spacer mendorong elemen ke kanan ──
                         Spacer(),
                         Icon(
                           Icons.circle,
@@ -309,7 +309,7 @@ class Tugas2Flutter extends StatelessWidget {
                             color: Color(0xFF1C1C1E),
                           ),
                         ),
-                        // ─── WAJIB: Spacer ────────────────────────────
+                        // ─── Spacer ────────────────────────────
                         Spacer(),
                         Text(
                           '± 1.2 km',
@@ -333,7 +333,7 @@ class Tugas2Flutter extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  // ─── WAJIB: Expanded kotak 1 ──────────────────────
+                  // ─── Expanded kotak 1 ──────────────────────
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -370,7 +370,7 @@ class Tugas2Flutter extends StatelessWidget {
  
                   const SizedBox(width: 10),
  
-                  // ─── WAJIB: Expanded kotak 2 ──────────────────────
+                  // ─── Expanded kotak 2 ──────────────────────
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -461,10 +461,10 @@ class Tugas2Flutter extends StatelessWidget {
             ),
  
             // ─── 6. DESKRIPSI NARATIF ──────────────────────────────
-            // ─── WAJIB: SizedBox jarak vertikal ───────────────────
+            // ─── SizedBox jarak vertikal ───────────────────
             const SizedBox(height: 16),
  
-            // ─── WAJIB: Padding agar teks tidak menyentuh tepi ────
+            // ─── Padding agar teks tidak menyentuh tepi ────
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -561,7 +561,7 @@ class Tugas2Flutter extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  // ─── WAJIB: Row untuk layout branding ─────────────
+                  // ─── Row untuk layout branding ─────────────
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -614,7 +614,7 @@ class Tugas2Flutter extends StatelessWidget {
                   // Tombol aksi utama
                   Row(
                     children: [
-                      // ─── WAJIB: Expanded untuk tombol ─────────────
+                      // ─── Expanded untuk tombol ─────────────
                       Expanded(
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
