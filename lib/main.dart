@@ -1,5 +1,6 @@
+import 'package:belajar_flutter/WorkInProgress/tugas2_flutter.dart';
 import 'package:flutter/material.dart';
-import 'WorkInProgress/my_profile.dart';
+//import 'WorkInProgress/my_profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: MyProfile(),
+      home: Tugas2Flutter(),
     );
   }
 }
