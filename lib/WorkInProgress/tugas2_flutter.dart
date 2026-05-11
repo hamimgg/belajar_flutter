@@ -6,10 +6,10 @@ class Tugas2Flutter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            // ─── 1. HEADER AppBar ─────────────────────────────────────
+            // ─── 1. AppBar ─────────────────────────────────────
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5A623),
-        foregroundColor: Colors.black,
+        //foregroundColor: Colors.black,
         elevation: 0,
         title: const Text(
           'Detail Pedagang',
