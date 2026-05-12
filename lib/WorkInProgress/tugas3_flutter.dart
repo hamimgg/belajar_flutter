@@ -111,35 +111,59 @@ class Tugas3Flutter extends StatelessWidget {
           ),
             GridView.count(
             crossAxisCount:  3,
-            mainAxisSpacing: 2,
-            crossAxisSpacing: 2,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            childAspectRatio: 1,
 
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             children: [
-              Image.asset("assets/images/bahlul.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/jom_main.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/nasi_padang.jpeg", fit: BoxFit.cover,),
-              Image.asset("assets/images/nyawit.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/windah.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/warung_rokok.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/bahlul.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/jom_main.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/nasi_padang.jpeg", fit: BoxFit.cover,),
-              Image.asset("assets/images/nyawit.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/windah.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/warung_rokok.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/bahlul.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/jom_main.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/nasi_padang.jpeg", fit: BoxFit.cover,),
+              Stack(
+                alignment: AlignmentGeometry.bottomCenter,
+                clipBehavior: Clip.none,
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                  )
+                ),
+              ),
+              Positioned.fill(child: 
+              ClipRRect(
+                child:  Image.asset("assets/images/bahlul.jpg", fit: BoxFit.cover,
+               ),
+              )
+              ),
+             Positioned(
+              bottom: -8,
+              child: Container(
+                padding: EdgeInsets.all(2),
+                color: Colors.deepOrangeAccent,
+              child: Text("bahlul", style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            ],
+            ),
+      
               Image.asset("assets/images/nyawit.jpg", fit: BoxFit.cover,),
               Image.asset("assets/images/windah.jpg", fit: BoxFit.cover,),
               Image.asset("assets/images/warung_rokok.jpg", fit: BoxFit.cover,),
             ],
-          )
-         ],
+            ),
+            ],
+          ),
         ),
-      ),
       ),
       );
 
