@@ -1,4 +1,5 @@
 import 'package:belajar_flutter/WorkInProgress/tugas2_flutter.dart';
+import 'package:belajar_flutter/WorkInProgress/tugas3_flutter.dart';
 import 'package:flutter/material.dart';
 //import 'WorkInProgress/my_profile.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Tugas2Flutter(),
+      home: Tugas3Flutter(),
     );
   }
 }
