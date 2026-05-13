@@ -85,7 +85,7 @@ class Tugas4Flutter extends StatelessWidget {
                 ),
 
                 title: Text("menu $index"),
-                subtitle: Text("Nasi + Rendang/Ayam Pop/Ayam Dangdut"),
+                subtitle: Text("Nasi + Rendang/Ayam Pop/Ayam Dangdutt"),
                 trailing: Icon(Icons.arrow_forward),
               );
             },
