@@ -111,9 +111,8 @@ class Tugas3Flutter extends StatelessWidget {
           ),
             GridView.count(
             crossAxisCount:  3,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            childAspectRatio: 1,
+            mainAxisSpacing: 2,
+            crossAxisSpacing: 2,
 
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
@@ -125,7 +124,7 @@ class Tugas3Flutter extends StatelessWidget {
               Container(
                 height: 100,
                 width: 100,
-                padding: EdgeInsets.all(8),
+                padding: EdgeInsets.all(2),
                 decoration: BoxDecoration(
                   color: Colors.green,
                   shape: BoxShape.circle,
@@ -155,10 +154,191 @@ class Tugas3Flutter extends StatelessWidget {
             ),
             ],
             ),
-      
-              Image.asset("assets/images/nyawit.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/windah.jpg", fit: BoxFit.cover,),
-              Image.asset("assets/images/warung_rokok.jpg", fit: BoxFit.cover,),
+             Stack(
+                alignment: AlignmentGeometry.bottomCenter,
+                clipBehavior: Clip.none,
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                  )
+                ),
+              ),
+              Positioned.fill(child: 
+              ClipRRect(
+                child:  Image.asset("assets/images/nyawit.jpg", fit: BoxFit.cover,
+               ),
+              )
+              ),
+             Positioned(
+              bottom: -8,
+              child: Container(
+                padding: EdgeInsets.all(2),
+                color: Colors.deepOrangeAccent,
+              child: Text("nyawit", style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            ],
+            ),
+             Stack(
+                alignment: AlignmentGeometry.bottomCenter,
+                clipBehavior: Clip.none,
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                  )
+                ),
+              ),
+              Positioned.fill(child: 
+              ClipRRect(
+                child:  Image.asset("assets/images/jom_main.jpg", fit: BoxFit.cover,
+               ),
+              )
+              ),
+             Positioned(
+              bottom: -8,
+              child: Container(
+                padding: EdgeInsets.all(2),
+                color: Colors.deepOrangeAccent,
+              child: Text("jom main", style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            ],
+            ),
+             Stack(
+                alignment: AlignmentGeometry.bottomCenter,
+                clipBehavior: Clip.none,
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                  )
+                ),
+              ),
+              Positioned.fill(child: 
+              ClipRRect(
+                child:  Image.asset("assets/images/nasi_padang.jpeg", fit: BoxFit.cover,
+               ),
+              )
+              ),
+             Positioned(
+              bottom: -8,
+              child: Container(
+                padding: EdgeInsets.all(2),
+                color: Colors.deepOrangeAccent,
+              child: Text("naspad", style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            ],
+            ),
+             Stack(
+                alignment: AlignmentGeometry.bottomCenter,
+                clipBehavior: Clip.none,
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                  )
+                ),
+              ),
+              Positioned.fill(child: 
+              ClipRRect(
+                child:  Image.asset("assets/images/warung_rokok.jpg", fit: BoxFit.cover,
+               ),
+              )
+              ),
+             Positioned(
+              bottom: -8,
+              child: Container(
+                padding: EdgeInsets.all(2),
+                color: Colors.deepOrangeAccent,
+              child: Text("warung babeh", style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            ],
+            ),
+             Stack(
+                alignment: AlignmentGeometry.bottomCenter,
+                clipBehavior: Clip.none,
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                padding: EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [Colors.red, Colors.blue],
+                  )
+                ),
+              ),
+              Positioned.fill(child: 
+              ClipRRect(
+                child:  Image.asset("assets/images/windah.jpg", fit: BoxFit.cover,
+               ),
+              )
+              ),
+             Positioned(
+              bottom: -8,
+              child: Container(
+                padding: EdgeInsets.all(2),
+                color: Colors.deepOrangeAccent,
+              child: Text("this guy", style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            ],
+            ),
             ],
             ),
             ],
