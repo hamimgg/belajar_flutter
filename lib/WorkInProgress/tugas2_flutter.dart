@@ -31,6 +31,7 @@ class Tugas2Flutter extends StatelessWidget {
       ),
  
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         // ─── olumn (struktur utama halaman) ─────────────────
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

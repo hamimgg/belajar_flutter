@@ -1,4 +1,4 @@
-import 'package:belajar_flutter/WorkInProgress/tugas5_flutter.dart';
+import 'package:belajar_flutter/WorkInProgress/login_page_tugas6.dart';
 import 'package:flutter/material.dart';
 //import 'WorkInProgress/my_profile.dart';
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Tugas5Flutter(),
+      home: LoginPage(),
     );
   }
 }
