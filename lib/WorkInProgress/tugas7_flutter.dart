@@ -8,21 +8,28 @@ class Tugas7Flutter extends StatefulWidget {
 }
 
 class _Tugas7FlutterState extends State<Tugas7Flutter> {
+  // State: Checkbox - Syarat & Ketentuan
   bool _isAgreed = false;
 
+  // State: Switch - Mode Tampilan
   bool _isDarkMode = false;
 
+  // State: Dropdown - Kategori Produk
   String? _selectedCategory;
   final List<String> _categories = [
+    'Elektronik',
+    'Pakaian',
     'Makanan',
-    'Minuman,'
-        'Lainnya',
+    'Lainnya',
   ];
 
+  // State: DatePicker - Pilih Tanggal
   DateTime? _selectedDate;
 
+  // State: TimePicker - Atur Pengingat
   TimeOfDay? _selectedTime;
 
+  // --- Helper: Format tanggal DD-MM-YYYY ---
   String get _formattedDate {
     if (_selectedDate == null) return 'Belum dipilih';
     final d = _selectedDate!;
@@ -31,6 +38,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
         '${d.year}';
   }
 
+  // --- Helper: Format waktu HH:mm ---
   String get _formattedTime {
     if (_selectedTime == null) return 'Belum diatur';
     final h = _selectedTime!.hour.toString().padLeft(2, '0');
