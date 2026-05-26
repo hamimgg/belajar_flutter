@@ -1,5 +1,5 @@
-import 'package:belajar_flutter/WorkInProgress/kakilima_home.dart';
-import 'package:belajar_flutter/WorkInProgress/tugas7_flutter.dart';
+import 'package:belajar_flutter/WorkInProgress/my_profile.dart';
+import 'package:belajar_flutter/WorkInProgress/tugas9_flutter.dart';
 import 'package:flutter/material.dart';
 
 class Tugas8Flutter extends StatefulWidget {
@@ -12,7 +12,7 @@ class Tugas8Flutter extends StatefulWidget {
 class _Tugas8FlutterState extends State<Tugas8Flutter> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    Tugas7Flutter(),
+    MyProfile(),
     KakiLima(),
 
     Center(child: Text("HALAMAN PROFILE", style: TextStyle(fontSize: 30))),
@@ -34,6 +34,7 @@ class _Tugas8FlutterState extends State<Tugas8Flutter> {
         onTap: _onItemTapped,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
+          BottomNavigationBarItem(icon: Icon(Icons.store), label: "katalog"),
           BottomNavigationBarItem(icon: Icon(Icons.people), label: "profile"),
         ],
       ),

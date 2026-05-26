@@ -159,7 +159,10 @@ class _KakiLimaState extends State<KakiLima> {
       //   ),
       // ),
       appBar: AppBar(
-        // leading: TextButton(onPressed: (){}, child: Icon(Icons.bac)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
         title: const Text(
           "Katalog Pedagang",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

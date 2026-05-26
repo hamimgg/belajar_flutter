@@ -1,7 +1,10 @@
+import 'package:belajar_flutter/WorkInProgress/tugas9_flutter.dart';
 import 'package:flutter/material.dart';
 
 class Tugas7Flutter extends StatefulWidget {
-  const Tugas7Flutter({super.key});
+  const Tugas7Flutter({super.key, required this.email, required this.password});
+  final String email;
+  final String password;
 
   @override
   State<Tugas7Flutter> createState() => _Tugas7FlutterState();
@@ -53,7 +56,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
       initialDate: _selectedDate ?? DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime(2100),
-      helpText: 'Pilih Tanggal Lahir',
+      helpText: 'Pilih Tanggal Produksi',
     );
     if (picked != null) {
       setState(() => _selectedDate = picked);
@@ -96,10 +99,10 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
   @override
   Widget build(BuildContext context) {
     final Color bgColor = _isDarkMode
-        ? const Color(0xFF1A1A2E)
+        ? const Color(0xFF1c1c1e)
         : const Color(0xFFF5F7FF);
     final Color cardColor = _isDarkMode
-        ? const Color(0xFF16213E)
+        ? const Color(0xFF524534)
         : Colors.white;
     final Color textColor = _isDarkMode
         ? Colors.white
@@ -110,23 +113,23 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
       backgroundColor: bgColor,
       appBar: AppBar(
         title: const Text(
-          'Input Interaktif',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          'Form Pendaftaran Pedagang',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         centerTitle: true,
-        backgroundColor: Colors.indigo,
+        backgroundColor: Color(0xfff5a623),
         foregroundColor: Colors.white,
         elevation: 2,
       ),
 
       // ===================== DRAWER =====================
-      drawer: Drawer(
+      endDrawer: Drawer(
         child: Column(
           children: [
             DrawerHeader(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.indigo, Colors.indigoAccent],
+                  colors: [Colors.black, Color(0xff1c1c1e)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -134,7 +137,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
+                children: [
                   Icon(Icons.widgets_rounded, color: Colors.white, size: 40),
                   SizedBox(height: 8),
                   Text(
@@ -152,10 +155,14 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
                 ],
               ),
             ),
+            SizedBox(height: 4),
+            Text("Halo,"),
+            Text(widget.email),
+            SizedBox(height: 4),
             ListTile(
               leading: const Icon(
                 Icons.check_box_outlined,
-                color: Colors.indigo,
+                color: Color(0xff1c1c1e),
               ),
               title: const Text('Syarat & Ketentuan'),
               subtitle: const Text('Checkbox persetujuan'),
@@ -165,7 +172,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
             ListTile(
               leading: const Icon(
                 Icons.dark_mode_outlined,
-                color: Colors.indigo,
+                color: Color(0xff1c1c1e),
               ),
               title: const Text('Mode Tampilan'),
               subtitle: const Text('Toggle gelap / terang'),
@@ -175,7 +182,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
             ListTile(
               leading: const Icon(
                 Icons.category_outlined,
-                color: Colors.indigo,
+                color: Color(0xff1c1c1e),
               ),
               title: const Text('Kategori Produk'),
               subtitle: const Text('Pilih kategori dropdown'),
@@ -185,18 +192,36 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
             ListTile(
               leading: const Icon(
                 Icons.calendar_today_outlined,
-                color: Colors.indigo,
+                color: Color(0xff1c1c1e),
               ),
               title: const Text('Pilih Tanggal'),
-              subtitle: const Text('Date picker tanggal lahir'),
+              subtitle: const Text('Date picker tanggal produksi'),
               onTap: () => _scrollToSection('tanggal'),
             ),
             const Divider(height: 1),
             ListTile(
-              leading: const Icon(Icons.alarm_outlined, color: Colors.indigo),
-              title: const Text('Atur Pengingat'),
+              leading: const Icon(
+                Icons.alarm_outlined,
+                color: Color(0xff1c1c1e),
+              ),
+              title: const Text('Atur Waktu'),
               subtitle: const Text('Time picker pengingat'),
               onTap: () => _scrollToSection('pengingat'),
+            ),
+            const Divider(height: 1),
+            ListTile(
+              leading: const Icon(Icons.home, color: Color(0xffF5A623)),
+              title: const Text(
+                "List Bumbu",
+                style: TextStyle(color: Color(0xff1c1c1e)),
+              ),
+              onLongPress: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const KakiLima()),
+                );
+              },
             ),
           ],
         ),
@@ -204,17 +229,18 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
 
       // ===================== BODY =====================
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsetsGeometry.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // ---- 1. Syarat & Ketentuan ----
             _SectionCard(
               key: _sectionKeys['syarat'],
               cardColor: cardColor,
               textColor: textColor,
-              icon: Icons.check_box_outlined,
-              title: '1. Syarat & Ketentuan',
+              icon: Icons.checklist_outlined,
+              title:
+                  '''1. Syarat & Ketentuan:\n\n- Pedagang menyatakan produk tidak melanggar hak cipta (nama/foto milik sendiri)\n- Pedagang menyetujui bahwa platform berhak menghapus menu yang melanggar ketentuan''',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -222,7 +248,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
                     children: [
                       Checkbox(
                         value: _isAgreed,
-                        activeColor: Colors.indigo,
+                        activeColor: Color(0xfff5a623),
                         onChanged: (val) =>
                             setState(() => _isAgreed = val ?? false),
                       ),
@@ -293,7 +319,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
                   ),
                   Switch(
                     value: _isDarkMode,
-                    activeThumbColor: Colors.indigo,
+                    activeThumbColor: Color(0xfff5a623),
                     onChanged: (val) => setState(() => _isDarkMode = val),
                   ),
                 ],
@@ -328,7 +354,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(
-                          color: Colors.indigo,
+                          color: Color(0xfff5a623),
                           width: 1.5,
                         ),
                       ),
@@ -345,7 +371,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
                     Text(
                       'Anda memilih kategori: $_selectedCategory',
                       style: const TextStyle(
-                        color: Colors.indigo,
+                        color: Color(0xfff5a623),
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),
@@ -362,16 +388,16 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
               cardColor: cardColor,
               textColor: textColor,
               icon: Icons.calendar_today_outlined,
-              title: '4. Pilih Tanggal',
+              title: '4. Pilih Tanggal Produksi',
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ElevatedButton.icon(
                     onPressed: _pickDate,
                     icon: const Icon(Icons.date_range),
-                    label: const Text('Pilih Tanggal Lahir'),
+                    label: const Text('Pilih Tanggal Produksi'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: Color(0xfff5a623),
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
@@ -384,7 +410,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Tanggal Lahir: $_formattedDate',
+                    'Tanggal Produksi: $_formattedDate',
                     style: TextStyle(
                       color: textColor,
                       fontWeight: FontWeight.w600,
@@ -411,7 +437,7 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
                     icon: const Icon(Icons.access_time),
                     label: const Text('Atur Waktu Pengingat'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.indigo,
+                      backgroundColor: Color(0xfff5a623),
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
@@ -441,14 +467,14 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Colors.indigo, Colors.indigoAccent],
+                  colors: [Colors.orangeAccent, Color(0xfff5a623)],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.indigo.withOpacity(0.3),
+                    color: Color(0xfff5a623).withOpacity(0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -543,29 +569,35 @@ class _SectionCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(icon, color: Colors.indigo, size: 20),
-                const SizedBox(width: 8),
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: Color(0xfff5a623), size: 20),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      height: 1.5,
+                    ),
+                    // textAlign: TextAlign.justify,
+                    softWrap: true,
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 14),
-            child,
-          ],
-        ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          child,
+        ],
       ),
     );
   }

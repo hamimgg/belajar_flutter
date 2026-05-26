@@ -1,4 +1,5 @@
 import 'package:belajar_flutter/WorkInProgress/tugas2_flutter.dart';
+import 'package:belajar_flutter/WorkInProgress/tugas7_flutter.dart';
 import 'package:belajar_flutter/WorkInProgress/welcoming_page.dart';
 import 'package:belajar_flutter/extension/navigator.dart';
 import 'package:flutter/gestures.dart';
@@ -15,6 +16,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool pembeli = true;
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,6 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           prefixIcon: Icon(Icons.mail_outline_sharp),
                         ),
+                        controller: emailController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Nama/Email tidak boleh kosong";
@@ -178,6 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                           prefixIcon: Icon(Icons.lock_outline_sharp),
                           suffixIcon: Icon(Icons.visibility),
                         ),
+                        controller: passwordController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Kata sandi tidak boleh kosong";
@@ -209,7 +214,12 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         //print("Sudah memenuhi syarat");
-                        context.push(Tugas2Flutter());
+                        context.push(
+                          Tugas7Flutter(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ),
+                        );
                       }
                     },
                     child: Text(
