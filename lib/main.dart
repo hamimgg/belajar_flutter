@@ -1,8 +1,15 @@
-import 'package:belajar_flutter/WorkInProgress/tugas9_flutter.dart';
+import 'package:belajar_flutter/WorkInProgress/database/preference_handler.dart';
+import 'package:belajar_flutter/WorkInProgress/views/splash_screen.dart';
+// import 'package:belajar_flutter/WorkInProgress/welcoming_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 //import 'WorkInProgress/my_profile.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID', null);
+  await PreferenceHandler.init();
   runApp(const MyApp());
 }
 
@@ -32,7 +39,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: KakiLima(),
+      home: WelcomingPage(),
     );
   }
 }
