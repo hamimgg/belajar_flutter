@@ -1,36 +1,30 @@
 import 'package:belajar_flutter/WorkInProgress/database/db_helper.dart';
-import 'package:belajar_flutter/WorkInProgress/database/preference_handler.dart';
+import 'package:belajar_flutter/WorkInProgress/login_page_tugas6.dart';
 import 'package:belajar_flutter/WorkInProgress/models/user_model_sql.dart';
-import 'package:belajar_flutter/WorkInProgress/views/home_screen.dart';
-import 'package:belajar_flutter/WorkInProgress/views/register_screen.dart';
-import 'package:belajar_flutter/WorkInProgress/views/splash_screen.dart';
-// import 'package:belajar_flutter/WorkInProgress/welcoming_page.dart';
 import 'package:belajar_flutter/extension/navigator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool pembeli = true;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController teleponController = TextEditingController();
   final TextEditingController namaController = TextEditingController();
-  void login() async {
+  void register() async {
+    // print("register() dipanggil");
     final email = emailController.text.trim();
     final pass = passwordController.text.trim();
-    final telepon = teleponController.text;
     final nama = namaController.text;
-    print("email: '$email'");
-    print("password: '$pass'");
+    final telepon = teleponController.text;
 
     if (email.isEmpty || pass.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -39,38 +33,49 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    final pengguna = await DBHelper().loginUser(
-      UserModelSql(email: email, password: pass),
+    final user = UserModelSql(
+      email: email,
+      password: pass,
+      nama: nama,
+      telepon: telepon,
     );
+    bool success = await DBHelper().registerUser(user);
+    // print(success);
 
+    // Cek apakah widget masih terpasang (mounted) sebelum menggunakan context
     if (!mounted) return;
 
-    if (pengguna != null) {
-      if (!context.mounted) return;
-      context.push(MainScreen());
-      // Navigator.of(
-      //   context,
-      // ).pushReplacement(MaterialPageRoute(builder: (context) => MainScreen()));
-    } else {
+    if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Login gagal! email atau Password salah."),
+          content: Text('Akun berhasil dibuat'),
+          duration: Duration(seconds: 2),
         ),
       );
+      await Future.delayed(Duration(seconds: 2));
+
+      if (!mounted) return;
+      context.push(LoginPage());
+
+      // Tambahkan navigasi ke halaman login jika perlu
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Email sudah terdaftar!')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 8, 8, 41),
+      backgroundColor: Color(0xFF1C1C1E),
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            context.pushAndRemoveAll(WelcomingPage());
-          },
-          icon: Icon(Icons.close, color: Colors.white),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {
+        //     context.pushAndRemoveAll(WelcomingPage());
+        //   },
+        //   icon: Icon(Icons.close, color: Colors.white),
+        // ),
         backgroundColor: const Color(0xFF1C1C1E),
       ),
       body: Container(
@@ -93,70 +98,6 @@ class _LoginPageState extends State<LoginPage> {
                     color: Color(0xFFF5A623),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              pembeli = true;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 12),
-                            decoration: BoxDecoration(
-                              color: pembeli
-                                  ? Color(0xFFF5A623)
-                                  : Color(0xFF303030),
-
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Pembeli",
-                                style: TextStyle(
-                                  color: pembeli
-                                      ? Color(0xFF1C1C1E)
-                                      : Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              pembeli = false;
-                            });
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 12),
-                            decoration: BoxDecoration(
-                              color: !pembeli
-                                  ? Color(0xFFF5A623)
-                                  : Color(0xFF303030),
-
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Pedagang",
-                                style: TextStyle(
-                                  color: !pembeli
-                                      ? Color(0xFF1C1C1E)
-                                      : Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
                 SizedBox(height: 40),
                 Text(
@@ -169,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: 12),
                 Text(
-                  "Masuk untuk mulai menemukan pedagang terdekat",
+                  "Masuk untuk membuat akun anda",
                   style: TextStyle(color: Color(0xFFAAAAAA)),
                 ),
                 SizedBox(height: 32),
@@ -178,6 +119,34 @@ class _LoginPageState extends State<LoginPage> {
                   key: _formKey,
                   child: Column(
                     children: [
+                      TextFormField(
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: "Nama",
+                          hintStyle: TextStyle(color: Color(0xFFAAAAAA)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFFF5A623)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFFF5A623)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          prefixIcon: Icon(Icons.mail_outline_sharp),
+                        ),
+                        controller: namaController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Nama tidak boleh kosong";
+                          }
+                          // else if (!value.contains('@')) {
+                          //   return "Format email tidak valid";
+                          // }
+
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: 16),
                       TextFormField(
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -196,10 +165,39 @@ class _LoginPageState extends State<LoginPage> {
                         controller: emailController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Nama/Email tidak boleh kosong";
+                            return "Email tidak boleh kosong";
                           } else if (!value.contains('@')) {
                             return "Format email tidak valid";
                           }
+                          return null;
+                        },
+                      ),
+
+                      SizedBox(height: 16),
+
+                      TextFormField(
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: "Nomor Telepon",
+                          hintStyle: TextStyle(color: Color(0xFFAAAAAA)),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFFF5A623)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFFF5A623)),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          prefixIcon: Icon(Icons.mail_outline_sharp),
+                        ),
+                        controller: teleponController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "No telepon tidak boleh kosong";
+                          }
+                          // else if (!value.contains('@')) {
+                          //   return "Format email tidak valid";
+                          // }
                           return null;
                         },
                       ),
@@ -237,88 +235,68 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                Align(
-                  alignment: AlignmentGeometry.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Lupa Kata Sandi?",
-                      style: TextStyle(color: Color(0xFFF5A623)),
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: AlignmentGeometry.centerRight,
+                //   child: TextButton(
+                //     onPressed: () {},
+                //     child: Text(
+                //       "Lupa Kata Sandi?",
+                //       style: TextStyle(color: Color(0xFFF5A623)),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFFF5A623),
                     ),
-                    onPressed: () async {
-                      await PreferenceHandler.setlogin(true);
+                    onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        login();
-                        //print("Sudah memenuhi syarat");
+                        register();
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("harap lengkapi form dengan benar"),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
                       }
                     },
+                    // () async {
+                    //   await PreferenceHandler.setlogin(true);
+                    //   if (_formKey.currentState!.validate()) {
+                    //     //print("Sudah memenuhi syarat");
+                    //     context.push(
+                    //       Tugas7Flutter(
+                    //         email: emailController.text,
+                    //         password: passwordController.text,
+                    //       ),
+                    //     );
+                    //   }
+                    // },
                     child: Text(
-                      "Masuk",
+                      "Daftar",
                       style: TextStyle(color: Color(0xFF1C1C1E)),
                     ),
                   ),
                 ),
                 SizedBox(height: 16),
-                Text(
-                  "Atau masuk dengan",
-                  style: TextStyle(color: Color(0xFFAAAAAA)),
-                ),
-                SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      //width: 140,
-                      height: 32,
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Image.asset(
-                            "assets/images/logo_google.png",
-                            width: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 4),
-                    SizedBox(
-                      //width: 140,
-                      height: 32,
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: FaIcon(
-                            FontAwesomeIcons.facebookF,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 SizedBox(height: 16),
                 Text.rich(
                   TextSpan(
-                    text: "Belum punya akun?",
+                    text: "Sudah punya akun?",
                     style: TextStyle(color: Color(0xFFAAAAAA)),
                     children: [
                       TextSpan(
-                        text: "Daftar",
+                        text: "Masuk",
                         style: TextStyle(
                           color: Color(0xFFF5A623),
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                         ),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => context.push(RegisterScreen()),
+                          ..onTap = () => context.push(LoginPage()),
                       ),
                     ],
                   ),
@@ -331,25 +309,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  // TextFormField textFormConst ({
-  //   required String hintText,
-  //   required String? Function(String?)? validator,
-  //   required TextEditingController controller,
-  // })
-  // {
-  //   return TextFormField(
-  //     onChanged: (value) {
-  //       setState(() {
-
-  //       });
-  //     },
-  //     validator: validator,
-  //     controller: controller,
-  //     decoration: InputDecoration(
-  //       hintText: hintText,
-  //       enabledBorder: borderConst(),
-
-  //     ),
-  //   )
-  // }
 }

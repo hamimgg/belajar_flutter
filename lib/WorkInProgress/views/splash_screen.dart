@@ -1,6 +1,6 @@
 import 'package:belajar_flutter/WorkInProgress/database/preference_handler.dart';
 import 'package:belajar_flutter/WorkInProgress/login_page_tugas6.dart';
-import 'package:belajar_flutter/WorkInProgress/tugas9_flutter.dart';
+import 'package:belajar_flutter/WorkInProgress/views/home_screen.dart';
 import 'package:belajar_flutter/extension/navigator.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class _WelcomingPageState extends State<WelcomingPage> {
     if (!mounted) return;
 
     if (PreferenceHandler.isLogin) {
-      context.pushAndRemoveAll(KakiLima());
+      context.pushAndRemoveAll(MainScreen());
     } else {
       context.pushAndRemoveAll(LoginPage());
     }
@@ -41,21 +41,21 @@ class _WelcomingPageState extends State<WelcomingPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset("assets/images/logo_asongan (1).png"),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFF5A623),
-                  ),
-                  onPressed: () {
-                    context.push(LoginPage());
-                  },
-                  child: Text(
-                    "Mulai Sekarang",
-                    style: TextStyle(color: Color(0xFF1C1C1E)),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   child: ElevatedButton(
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: Color(0xFFF5A623),
+              //     ),
+              //     onPressed: () {
+              //       context.push(LoginPage());
+              //     },
+              //     child: Text(
+              //       "Mulai Sekarang",
+              //       style: TextStyle(color: Color(0xFF1C1C1E)),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
