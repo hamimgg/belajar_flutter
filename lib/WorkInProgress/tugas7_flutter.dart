@@ -1,4 +1,7 @@
+import 'package:belajar_flutter/WorkInProgress/database/preference_handler.dart';
+import 'package:belajar_flutter/WorkInProgress/login_page_tugas6.dart';
 import 'package:belajar_flutter/WorkInProgress/tugas9_flutter.dart';
+import 'package:belajar_flutter/extension/navigator.dart';
 import 'package:flutter/material.dart';
 
 class Tugas7Flutter extends StatefulWidget {
@@ -96,6 +99,21 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
     }
   }
 
+  void _prosesLogout() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Logout Berhasil"),
+        backgroundColor: Colors.grey,
+        duration: Duration(seconds: 3),
+      ),
+    );
+
+    await PreferenceHandler.logOut();
+
+    if (!mounted) return;
+    context.pushAndRemoveAll(LoginPage());
+  }
+
   @override
   Widget build(BuildContext context) {
     final Color bgColor = _isDarkMode
@@ -156,8 +174,11 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
               ),
             ),
             SizedBox(height: 4),
-            Text("Halo,"),
-            Text(widget.email),
+            Text(
+              "Halo,",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+            ),
+            Text(widget.email, style: TextStyle(fontSize: 20)),
             SizedBox(height: 4),
             ListTile(
               leading: const Icon(
@@ -222,6 +243,15 @@ class _Tugas7FlutterState extends State<Tugas7Flutter> {
                   MaterialPageRoute(builder: (context) => const KakiLima()),
                 );
               },
+            ),
+            const Divider(height: 1),
+            ListTile(
+              leading: const Icon(Icons.arrow_back, color: Color(0xffF5A623)),
+              title: const Text(
+                "Logout",
+                style: TextStyle(color: Color(0xff1c1c1e)),
+              ),
+              onTap: _prosesLogout,
             ),
           ],
         ),

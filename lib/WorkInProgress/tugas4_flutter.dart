@@ -8,14 +8,14 @@ class Tugas4Flutter extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Manajemen Toko",
+          "RM. AMBO JAYA",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.red,
-            fontSize: 40,
+            color: Color(0xffffffff),
+            fontSize: 22,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 233, 188, 53),
+        backgroundColor: const Color(0xFFF5A623),
         centerTitle: true,
       ),
       body: ListView(

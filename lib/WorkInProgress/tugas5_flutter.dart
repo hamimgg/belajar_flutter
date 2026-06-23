@@ -32,7 +32,7 @@ class _Tugas5FlutterState extends State<Tugas5Flutter> {
           },
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Color(0xFFF5A623),
         title: Text(
           "Detail Pedagang",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -58,7 +58,7 @@ class _Tugas5FlutterState extends State<Tugas5Flutter> {
                           : SizedBox(height: 0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orangeAccent,
+                          backgroundColor: Color(0xffF5A623),
                         ),
                         onPressed: () {
                           setState(() {

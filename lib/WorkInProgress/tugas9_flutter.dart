@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:belajar_flutter/models/produk.dart';
+import 'package:belajar_flutter/WorkInProgress/models/produk.dart';
 import 'package:faker/faker.dart' as faker_lib;
 import 'package:flutter/material.dart';
 

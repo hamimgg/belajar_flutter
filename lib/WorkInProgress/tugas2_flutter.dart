@@ -6,30 +6,21 @@ class Tugas2Flutter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            // ─── 1. AppBar ─────────────────────────────────────
+      // ─── 1. AppBar ─────────────────────────────────────
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5A623),
         //foregroundColor: Colors.black,
         elevation: 0,
         title: const Text(
           'Detail Pedagang',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite_border),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.share),
-            onPressed: () {},
-          ),
+          IconButton(icon: const Icon(Icons.favorite_border), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.share), onPressed: () {}),
         ],
       ),
- 
+
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         // ─── olumn (struktur utama halaman) ─────────────────
@@ -71,7 +62,7 @@ class Tugas2Flutter extends StatelessWidget {
                 ],
               ),
             ),
- 
+
             // ── Avatar + padding ───────────────────────────────────
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -87,10 +78,7 @@ class Tugas2Flutter extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: const Color(0xFF1C1C1E),
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 3,
-                        ),
+                        border: Border.all(color: Colors.white, width: 3),
                       ),
                       // ─── Center ────────────────────────────
                       child: const Center(
@@ -104,10 +92,10 @@ class Tugas2Flutter extends StatelessWidget {
                         ),
                       ),
                     ),
- 
+
                     // ─── SizedBox (jarak vertikal) ─────────────
                     const SizedBox(height: 8),
- 
+
                     // ─── 2. IDENTITAS UTAMA (Center + Nama) ───────────
                     Center(
                       child: Column(
@@ -151,10 +139,10 @@ class Tugas2Flutter extends StatelessWidget {
                 ),
               ),
             ),
- 
+
             // Kompensasi offset translate
             const SizedBox(height: 0),
- 
+
             // ─── 3. DETAIL KONTAK ──────────────────────────────────
             // Container + Padding wajib membungkus info kontak
             Padding(
@@ -165,10 +153,7 @@ class Tugas2Flutter extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: const Color(0xFFE8E8E8),
-                    width: 1,
-                  ),
+                  border: Border.all(color: const Color(0xFFE8E8E8), width: 1),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.05),
@@ -190,7 +175,7 @@ class Tugas2Flutter extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
- 
+
                     // Email — Row + Icon + SizedBox + Text (WAJIB)
                     Row(
                       children: const [
@@ -210,9 +195,9 @@ class Tugas2Flutter extends StatelessWidget {
                         ),
                       ],
                     ),
- 
+
                     const SizedBox(height: 10),
- 
+
                     // ID Pedagang — Row + Icon + SizedBox + Text
                     Row(
                       children: const [
@@ -235,9 +220,9 @@ class Tugas2Flutter extends StatelessWidget {
                 ),
               ),
             ),
- 
+
             const SizedBox(height: 12),
- 
+
             // ─── 4. INFORMASI PENDUKUNG (Row + Spacer) ────────────
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -250,10 +235,7 @@ class Tugas2Flutter extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: const Color(0xFFE8E8E8),
-                    width: 1,
-                  ),
+                  border: Border.all(color: const Color(0xFFE8E8E8), width: 1),
                 ),
                 child: Column(
                   children: [
@@ -275,11 +257,7 @@ class Tugas2Flutter extends StatelessWidget {
                         ),
                         // ─── Spacer mendorong elemen ke kanan ──
                         Spacer(),
-                        Icon(
-                          Icons.circle,
-                          size: 10,
-                          color: Color(0xFF27AE60),
-                        ),
+                        Icon(Icons.circle, size: 10, color: Color(0xFF27AE60)),
                         SizedBox(width: 4),
                         Text(
                           'Sedang Berjualan',
@@ -291,9 +269,9 @@ class Tugas2Flutter extends StatelessWidget {
                         ),
                       ],
                     ),
- 
+
                     const SizedBox(height: 10),
- 
+
                     // Baris 2: Lokasi + Spacer + Jarak
                     Row(
                       children: const [
@@ -326,9 +304,9 @@ class Tugas2Flutter extends StatelessWidget {
                 ),
               ),
             ),
- 
+
             const SizedBox(height: 16),
- 
+
             // ─── 5. STATISTIK HORIZONTAL (Row + Expanded) ─────────
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -360,7 +338,7 @@ class Tugas2Flutter extends StatelessWidget {
                             'Total Pesanan',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Color(0xFF4A2800),
+                              color: Color(0xFF1C1C1E),
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -368,9 +346,9 @@ class Tugas2Flutter extends StatelessWidget {
                       ),
                     ),
                   ),
- 
+
                   const SizedBox(width: 10),
- 
+
                   // ─── Expanded kotak 2 ──────────────────────
                   Expanded(
                     child: Container(
@@ -416,9 +394,9 @@ class Tugas2Flutter extends StatelessWidget {
                       ),
                     ),
                   ),
- 
+
                   const SizedBox(width: 10),
- 
+
                   // ─── Expanded kotak 3 (bonus) ──────────────────────
                   Expanded(
                     child: Container(
@@ -460,11 +438,11 @@ class Tugas2Flutter extends StatelessWidget {
                 ],
               ),
             ),
- 
+
             // ─── 6. DESKRIPSI NARATIF ──────────────────────────────
             // ─── SizedBox jarak vertikal ───────────────────
             const SizedBox(height: 16),
- 
+
             // ─── Padding agar teks tidak menyentuh tepi ────
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -507,9 +485,9 @@ class Tugas2Flutter extends StatelessWidget {
                 ],
               ),
             ),
- 
+
             const SizedBox(height: 16),
- 
+
             // Menu Unggulan
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -549,17 +527,15 @@ class Tugas2Flutter extends StatelessWidget {
                 ],
               ),
             ),
- 
+
             // ─── 7. VISUAL BRANDING ────────────────────────────────
             // Container dekoratif di bagian bawah sebagai branding
             const SizedBox(height: 20),
- 
+
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 20),
-              decoration: const BoxDecoration(
-                color: Color(0xFF1C1C1E),
-              ),
+              decoration: const BoxDecoration(color: Color(0xFF1C1C1E)),
               child: Column(
                 children: [
                   // ─── Row untuk layout branding ─────────────
@@ -609,9 +585,9 @@ class Tugas2Flutter extends StatelessWidget {
                       ),
                     ],
                   ),
- 
+
                   const SizedBox(height: 20),
- 
+
                   // Tombol aksi utama
                   Row(
                     children: [
@@ -659,9 +635,9 @@ class Tugas2Flutter extends StatelessWidget {
                       ),
                     ],
                   ),
- 
+
                   const SizedBox(height: 16),
- 
+
                   const Text(
                     'Memberdayakan pedagang kaki lima lewat teknologi digital yang sederhana dan inklusif.',
                     textAlign: TextAlign.center,
@@ -680,14 +656,14 @@ class Tugas2Flutter extends StatelessWidget {
     );
   }
 }
- 
+
 // ── Helper widget: Menu Chip ────────────────────────────────────────
 class _MenuChip extends StatelessWidget {
   final String label;
   final String price;
- 
+
   const _MenuChip({required this.label, required this.price});
- 
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
