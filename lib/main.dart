@@ -1,5 +1,5 @@
 import 'package:belajar_flutter/WorkInProgress/database/preference_handler.dart';
-import 'package:belajar_flutter/WorkInProgress/views/get_post_screen.dart';
+import 'package:belajar_flutter/WorkInProgress/views/splash_screen.dart';
 // import 'package:belajar_flutter/WorkInProgress/welcoming_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: RecipesScreen(),
+      home: WelcomingPage(),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:belajar_flutter/WorkInProgress/models/recipes.dart';
+import 'package:belajar_flutter/WorkInProgress/views/detail_recipe.dart';
+import 'package:belajar_flutter/extension/navigator.dart';
 import 'package:belajar_flutter/services/api_services.dart';
 import 'package:belajar_flutter/services/dio_client.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,6 @@ class RecipesScreen extends StatefulWidget {
 class _RecipesScreenState extends State<RecipesScreen> {
   late final ApiService _apiService;
 
-  // 1. UPDATE: Change this to expect the wrapper 'Recipes' object instead of a List
   late Future<Recipes> _recipesFuture;
 
   @override
@@ -33,11 +34,14 @@ class _RecipesScreenState extends State<RecipesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF147b5a),
       appBar: AppBar(
-        title: const Text('Recipes', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.blue,
+        flexibleSpace: Image.asset(
+          'assets/images/banner.jpg',
+          fit: BoxFit.cover,
+        ),
       ),
-      // 2. UPDATE: Change the FutureBuilder type to 'Recipes'
+
       body: FutureBuilder<Recipes>(
         future: _recipesFuture,
         builder: (context, snapshot) {
@@ -49,7 +53,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Error: ${snapshot.error}'),
+                  Text('Error: '),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _refreshRecipes,
@@ -60,12 +64,10 @@ class _RecipesScreenState extends State<RecipesScreen> {
             );
           }
 
-          // 3. UPDATE: Check if the internal '.recipes' list is empty
           if (!snapshot.hasData || snapshot.data!.recipes.isEmpty) {
             return const Center(child: Text('No recipes found.'));
           }
 
-          // 4. UPDATE: Extract the actual list from the wrapper object
           final recipes = snapshot.data!.recipes;
 
           return RefreshIndicator(
@@ -75,50 +77,83 @@ class _RecipesScreenState extends State<RecipesScreen> {
               itemBuilder: (context, index) {
                 final recipe = recipes[index];
                 return Card(
+                  color: Color(0xFFF5F5F5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   margin: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 8,
                   ),
+
                   child: ListTile(
-                    title: Text(recipe.name),
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        recipe.image,
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          recipe.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          'Rating: ${recipe.rating} (${recipe.reviewCount} reviews)',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                     subtitle: Text(
                       'Cuisine: ${recipe.cuisine} | Difficulty: ${recipe.difficulty.name}',
                     ),
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: Text(recipe.name),
-                          content: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Ingredients:',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                ...recipe.ingredients.map(
-                                  (ingredient) => Text('- $ingredient'),
-                                ),
-                                const SizedBox(height: 16),
-                                const Text(
-                                  'Instructions:',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                ...recipe.instructions.map(
-                                  (instruction) => Text('- $instruction'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text('Close'),
-                            ),
-                          ],
-                        ),
-                      );
+                      context.push(DetailRecipe(recipe: recipe));
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (context) => AlertDialog(
+                      //     title: Text(recipe.name),
+                      //     content: SingleChildScrollView(
+                      //       child: Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           const Text(
+                      //             'Ingredients:',
+                      //             style: TextStyle(fontWeight: FontWeight.bold),
+                      //           ),
+                      //           ...recipe.ingredients.map(
+                      //             (ingredient) => Text('- $ingredient'),
+                      //           ),
+                      //           const SizedBox(height: 16),
+                      //           const Text(
+                      //             'Instructions:',
+                      //             style: TextStyle(fontWeight: FontWeight.bold),
+                      //           ),
+                      //           ...recipe.instructions.map(
+                      //             (instruction) => Text('- $instruction'),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //     actions: [
+                      //       TextButton(
+                      //         onPressed: () => Navigator.pop(context),
+                      //         child: const Text('Close'),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // );
                     },
                   ),
                 );

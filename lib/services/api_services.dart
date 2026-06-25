@@ -9,5 +9,5 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   @GET('/recipes')
-  Future<Recipe> getAllRecipes(@Query('limit') int limit);
+  Future<Recipes> getAllRecipes(@Query('limit') int limit);
 }

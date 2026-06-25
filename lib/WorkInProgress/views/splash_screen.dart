@@ -1,6 +1,4 @@
-import 'package:belajar_flutter/WorkInProgress/database/preference_handler.dart';
-import 'package:belajar_flutter/WorkInProgress/login_page_tugas6.dart';
-import 'package:belajar_flutter/WorkInProgress/views/home_screen.dart';
+import 'package:belajar_flutter/WorkInProgress/views/get_post_screen.dart';
 import 'package:belajar_flutter/extension/navigator.dart';
 import 'package:flutter/material.dart';
 
@@ -15,50 +13,94 @@ class _WelcomingPageState extends State<WelcomingPage> {
   @override
   void initState() {
     super.initState();
-    _checkLoginStatus();
+    // _checkLoginStatus();
   }
 
-  Future<void> _checkLoginStatus() async {
-    await Future.delayed(const Duration(seconds: 3));
+  // Future<void> _checkLoginStatus() async {
+  //   await Future.delayed(const Duration(seconds: 3));
 
-    if (!mounted) return;
+  //   if (!mounted) return;
+  //   context.pushAndRemoveAll(RecipesScreen());
 
-    if (PreferenceHandler.isLogin) {
-      context.pushAndRemoveAll(MainScreen());
-    } else {
-      context.pushAndRemoveAll(LoginPage());
-    }
-  }
+  //   // if (PreferenceHandler.isLogin) {
+  //   //   context.pushAndRemoveAll(RecipesScreen());
+  //   // } else {
+  //   //   context.pushAndRemoveAll(LoginPage());
+  //   // }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1C1C1E),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset("assets/images/logo_asongan (1).png"),
-              // SizedBox(
-              //   width: double.infinity,
-              //   child: ElevatedButton(
-              //     style: ElevatedButton.styleFrom(
-              //       backgroundColor: Color(0xFFF5A623),
-              //     ),
-              //     onPressed: () {
-              //       context.push(LoginPage());
-              //     },
-              //     child: Text(
-              //       "Mulai Sekarang",
-              //       style: TextStyle(color: Color(0xFF1C1C1E)),
-              //     ),
-              //   ),
-              // ),
-            ],
+      backgroundColor: Colors.red,
+      body: Stack(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Positioned(
+            bottom: 200,
+            left: 16,
+            right: 16,
+            child: Image.asset(
+              "assets/images/howtobasic.jpg",
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+          Positioned(
+            bottom: 100,
+            left: 16,
+            right: 16,
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.8),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: const Text(
+                    "Discover Delicious Recipes",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF129575),
+                    ),
+                    onPressed: () {
+                      context.pushAndRemoveAll(const RecipesScreen());
+                    },
+                    child: const Text(
+                      "Welcome to Recipe App",
+                      style: TextStyle(color: Color(0xFFffffff)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // SizedBox(
+          //   width: double.infinity,
+          //   child: ElevatedButton(
+          //     style: ElevatedButton.styleFrom(
+          //       backgroundColor: Color(0xFFF5A623),
+          //     ),
+          //     onPressed: () {
+          //       context.pushAndRemoveAll(RecipesScreen());
+          //     },
+          //     child: Text(
+          //       "Mulai Sekarang",
+          //       style: TextStyle(color: Color(0xFF1C1C1E)),
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
     );
   }
