@@ -32,17 +32,27 @@ class _WelcomingPageState extends State<WelcomingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      // backgroundColor: Colors.red,
       body: Stack(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Positioned.fill(
+            // bottom: 200,
+            // left: 16,
+            // right: 16,
+            child: Image.asset(
+              "assets/images/background.jpg",
+              fit: BoxFit.cover,
+            ),
+          ),
           Positioned(
-            bottom: 200,
+            top: 100,
             left: 16,
             right: 16,
             child: Image.asset(
-              "assets/images/howtobasic.jpg",
-              fit: BoxFit.cover,
+              "assets/images/telur.png",
+              width: 600,
+              height: 600,
             ),
           ),
           Positioned(
@@ -62,7 +72,7 @@ class _WelcomingPageState extends State<WelcomingPage> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                      color: Color(0xFF147b5a),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -77,8 +87,12 @@ class _WelcomingPageState extends State<WelcomingPage> {
                       context.pushAndRemoveAll(const RecipesScreen());
                     },
                     child: const Text(
-                      "Welcome to Recipe App",
-                      style: TextStyle(color: Color(0xFFffffff)),
+                      "How to Basic?",
+                      style: TextStyle(
+                        color: Color(0xFFffffff),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
                     ),
                   ),
                 ),

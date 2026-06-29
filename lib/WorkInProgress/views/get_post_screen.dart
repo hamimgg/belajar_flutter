@@ -34,7 +34,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF147b5a),
+      // backgroundColor: Color(0xFF0d4331),
       appBar: AppBar(
         flexibleSpace: Image.asset(
           'assets/images/banner.jpg',
@@ -42,125 +42,146 @@ class _RecipesScreenState extends State<RecipesScreen> {
         ),
       ),
 
-      body: FutureBuilder<Recipes>(
-        future: _recipesFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Error: '),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: _refreshRecipes,
-                    child: const Text('Retry'),
-                  ),
-                ],
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF117b5a), Color(0xFF194d3a)],
+          ),
+        ),
+        child: FutureBuilder<Recipes>(
+          future: _recipesFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Error: '),
+                    const SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: _refreshRecipes,
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            if (!snapshot.hasData || snapshot.data!.recipes.isEmpty) {
+              return const Center(child: Text('No recipes found.'));
+            }
+
+            final recipes = snapshot.data!.recipes;
+
+            return RefreshIndicator(
+              onRefresh: () async => _refreshRecipes(),
+              child: ListView.builder(
+                itemCount: recipes.length,
+                itemBuilder: (context, index) {
+                  final recipe = recipes[index];
+                  return Card(
+                    color: Color(0xFF147b5a),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+
+                    child: ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          recipe.image,
+                          width: 60,
+                          height: 60,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            recipe.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.star, color: Colors.yellow, size: 16),
+                              Text(
+                                'Rating: ${recipe.rating} (${recipe.reviewCount} reviews)',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white70,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      subtitle: Text(
+                        'Cuisine: ${recipe.cuisine} | Difficulty: ${recipe.difficulty.name}',
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white70,
+                      ),
+
+                      onTap: () {
+                        context.push(DetailRecipe(recipe: recipe));
+
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (context) => AlertDialog(
+                        //     title: Text(recipe.name),
+                        //     content: SingleChildScrollView(
+                        //       child: Column(
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: [
+                        //           const Text(
+                        //             'Ingredients:',
+                        //             style: TextStyle(fontWeight: FontWeight.bold),
+                        //           ),
+                        //           ...recipe.ingredients.map(
+                        //             (ingredient) => Text('- $ingredient'),
+                        //           ),
+                        //           const SizedBox(height: 16),
+                        //           const Text(
+                        //             'Instructions:',
+                        //             style: TextStyle(fontWeight: FontWeight.bold),
+                        //           ),
+                        //           ...recipe.instructions.map(
+                        //             (instruction) => Text('- $instruction'),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //     actions: [
+                        //       TextButton(
+                        //         onPressed: () => Navigator.pop(context),
+                        //         child: const Text('Close'),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // );
+                      },
+                    ),
+                  );
+                },
               ),
             );
-          }
-
-          if (!snapshot.hasData || snapshot.data!.recipes.isEmpty) {
-            return const Center(child: Text('No recipes found.'));
-          }
-
-          final recipes = snapshot.data!.recipes;
-
-          return RefreshIndicator(
-            onRefresh: () async => _refreshRecipes(),
-            child: ListView.builder(
-              itemCount: recipes.length,
-              itemBuilder: (context, index) {
-                final recipe = recipes[index];
-                return Card(
-                  color: Color(0xFFF5F5F5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-
-                  child: ListTile(
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        recipe.image,
-                        width: 60,
-                        height: 60,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          recipe.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Text(
-                          'Rating: ${recipe.rating} (${recipe.reviewCount} reviews)',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    subtitle: Text(
-                      'Cuisine: ${recipe.cuisine} | Difficulty: ${recipe.difficulty.name}',
-                    ),
-                    onTap: () {
-                      context.push(DetailRecipe(recipe: recipe));
-                      // showDialog(
-                      //   context: context,
-                      //   builder: (context) => AlertDialog(
-                      //     title: Text(recipe.name),
-                      //     content: SingleChildScrollView(
-                      //       child: Column(
-                      //         crossAxisAlignment: CrossAxisAlignment.start,
-                      //         children: [
-                      //           const Text(
-                      //             'Ingredients:',
-                      //             style: TextStyle(fontWeight: FontWeight.bold),
-                      //           ),
-                      //           ...recipe.ingredients.map(
-                      //             (ingredient) => Text('- $ingredient'),
-                      //           ),
-                      //           const SizedBox(height: 16),
-                      //           const Text(
-                      //             'Instructions:',
-                      //             style: TextStyle(fontWeight: FontWeight.bold),
-                      //           ),
-                      //           ...recipe.instructions.map(
-                      //             (instruction) => Text('- $instruction'),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //     actions: [
-                      //       TextButton(
-                      //         onPressed: () => Navigator.pop(context),
-                      //         child: const Text('Close'),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // );
-                    },
-                  ),
-                );
-              },
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }
