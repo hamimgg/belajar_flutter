@@ -1,5 +1,5 @@
+import 'package:belajar_flutter/Tugas15/presentation/pages/login_page.dart';
 import 'package:belajar_flutter/WorkInProgress/database/preference_handler.dart';
-import 'package:belajar_flutter/WorkInProgress/views/splash_screen.dart';
 // import 'package:belajar_flutter/WorkInProgress/welcoming_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -37,9 +37,9 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
-      home: WelcomingPage(),
+      home: LoginPage(),
     );
   }
 }
